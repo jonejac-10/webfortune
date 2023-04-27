@@ -4,6 +4,7 @@ from flask import (
 )
 from flask_sqlalchemy import SQLAlchemy
 import os 
+import subprocess
 
 app = Flask(__name__)
 app.secret_key = b'REPLACE_ME_x#pi*CO0@^z_beep_beep_boop_boop'
@@ -21,13 +22,17 @@ def index():
 
 @app.route('/fortune/')
 def fortune():
-    return '<pre>' + os.system(fortune) + '</pre>'
+    output = subprocess.check_output(['fortune']).decode()
+    return '<pre>' + output + '</pre>'
 
 @app.route('/cowsay/<message>/')
 def cowsay(message):
-    return '<pre>' + os.system(cowsay message) + '</pre>'
+    output = subprocess.check_output(['cowsay', f'{message}']).decode()
+    return '<pre>' + output + '</pre>'
 
 @app.route('/cowfortune/')
-def cowfortune():
-    return '<pre>' + os.system(fortune | cowsay) + '</pre>'
-
+def cowfortune(): 
+    text = subprocess.check_output(['fortune']).decode()
+    output = subprocess.check_output(['cowsay', f'{text}']).decode() 
+    return '<pre>' + output + '</pre>'
+    
