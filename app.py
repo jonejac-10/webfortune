@@ -7,14 +7,6 @@ import os
 import subprocess
 
 app = Flask(__name__)
-app.secret_key = b'REPLACE_ME_x#pi*CO0@^z_beep_beep_boop_boop'
-
-sqlite_uri = 'sqlite:///' + os.path.abspath(os.path.curdir) + '/test.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = sqlite_uri
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-from models import User
 
 @app.route('/')
 def index():
@@ -27,12 +19,12 @@ def fortune():
 
 @app.route('/cowsay/<message>/')
 def cowsay(message):
-    output = subprocess.check_output(['cowsay', f'{message}']).decode()
+    output = subprocess.check_output(['cowsay', message]).decode()
     return '<pre>' + output + '</pre>'
 
 @app.route('/cowfortune/')
 def cowfortune(): 
     text = subprocess.check_output(['fortune']).decode()
-    output = subprocess.check_output(['cowsay', f'{text}']).decode() 
+    output = subprocess.check_output(['cowsay', text]).decode() 
     return '<pre>' + output + '</pre>'
     
