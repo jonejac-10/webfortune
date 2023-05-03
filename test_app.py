@@ -15,7 +15,7 @@ def test_cowsay(app, client):
     assert res.status_code == 200
     page_output = res.get_data(as_text=True)
     assert message in page_output
-    assert "(oo)\____" in page_output
+    assert "(oo)\_x__" in page_output
 
 def test_fortune(app, client):
     res = client.get('/fortune/')
