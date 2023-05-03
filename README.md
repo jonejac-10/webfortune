@@ -6,9 +6,9 @@ In order to run this from the command line you must run "pip install Flask" the 
 The application may be accessed at "http://127.0.0.1:{PORT #}" as your URL
 
 ## Run application through Docker
-To run this through Docker you must first build the container with "docker build -t klsadler/webfortune ."
+To run this through Docker you must first build the container with "docker build -t jonejac-10/webfortune ."
  
-Then run the program with "docker run -dp {PORT #}:5000 klsadler/webfortune" 
+Then run the program with "docker run -dp {PORT #}:5000 jonejac-10/webfortune" 
 
 This can be accessed in your address bar with "{PORT #}:5000"
 
